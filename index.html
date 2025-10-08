@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prototipo Logística - Vista previa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-logo">🚚</span>
+        <h1>MoviLog</h1>
+        <p class="tagline">Tu logística inteligente en Chile</p>
+      </div>
+      <nav class="sidebar-nav">
+        <button class="nav-btn active" data-target="login">Iniciar sesión</button>
+        <button class="nav-btn" data-target="worker">Panel Trabajador</button>
+        <button class="nav-btn" data-target="client">Panel Cliente</button>
+        <button class="nav-btn" data-target="feedback">Evaluaciones</button>
+      </nav>
+      <div class="summary-card">
+        <h3>Resumen del día</h3>
+        <ul>
+          <li><span>Servicios activos</span><strong>12</strong></li>
+          <li><span>Entrega promedio</span><strong>47 min</strong></li>
+          <li><span>Satisfacción</span><strong>4.8 ★</strong></li>
+        </ul>
+      </div>
+    </aside>
+    <main class="content">
+      <section id="login" class="panel visible">
+        <header class="panel-header">
+          <h2>Acceso seguro</h2>
+          <p>Ingresa con tu correo profesional o tu cuenta personal para continuar.</p>
+        </header>
+        <div class="card-grid">
+          <article class="card login-card">
+            <h3>Correo corporativo</h3>
+            <p>Usa tu cuenta institucional de la empresa para acceder a herramientas avanzadas.</p>
+            <form class="form">
+              <label>Correo electrónico
+                <input type="email" placeholder="tu.nombre@movilog.cl" required />
+              </label>
+              <label>Contraseña
+                <input type="password" placeholder="••••••••" required />
+              </label>
+              <div class="form-actions">
+                <label class="remember">
+                  <input type="checkbox" />
+                  Recordarme
+                </label>
+                <a href="#" class="link">¿Olvidaste tu contraseña?</a>
+              </div>
+              <button type="submit" class="btn-primary">Entrar</button>
+            </form>
+          </article>
+          <article class="card login-card alt">
+            <h3>Cuenta personal</h3>
+            <p>Conecta tu cuenta de usuario para coordinar pedidos, pagos y rutas guardadas.</p>
+            <button class="btn-social">
+              <span class="icon">🌐</span>
+              Iniciar sesión con MoviLog ID
+            </button>
+            <button class="btn-social">
+              <span class="icon">📧</span>
+              Continuar con correo personal
+            </button>
+            <p class="hint">Al continuar aceptas nuestros términos y políticas.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="worker" class="panel">
+        <header class="panel-header">
+          <div>
+            <h2>Panel del trabajador</h2>
+            <p>Visualiza tus próximos servicios, rutas optimizadas y la información completa del cliente.</p>
+          </div>
+          <div class="status-chip on-route">En ruta</div>
+        </header>
+        <div class="two-column">
+          <div class="worker-profile card">
+            <div class="profile-header">
+              <img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=200&q=80" alt="Foto del conductor" />
+              <div>
+                <h3>María González</h3>
+                <p>Clase de licencia <strong>B - Profesional</strong></p>
+                <span class="badge">Edad: 32 años</span>
+              </div>
+            </div>
+            <ul class="profile-details">
+              <li>
+                <span>Contacto</span>
+                <strong>+56 9 8765 4321</strong>
+              </li>
+              <li>
+                <span>Horas de conducción hoy</span>
+                <strong>4 h 25 min</strong>
+              </li>
+              <li>
+                <span>Reputación</span>
+                <strong>4.9 ★</strong>
+              </li>
+            </ul>
+          </div>
+          <div class="service-details card">
+            <h3>Servicio asignado</h3>
+            <div class="client-info">
+              <div>
+                <span>Cliente</span>
+                <strong>Javier Morales</strong>
+              </div>
+              <div>
+                <span>Cuenta</span>
+                <strong>#CLI-20458</strong>
+              </div>
+            </div>
+            <div class="cargo-info">
+              <div>
+                <span>Producto a transportar</span>
+                <strong>Mobiliario de oficina (12 bultos)</strong>
+              </div>
+              <div>
+                <span>Prioridad</span>
+                <strong>Alta</strong>
+              </div>
+            </div>
+            <div class="route-insights">
+              <div class="insight">
+                <span>Distancia total</span>
+                <strong>18.6 km</strong>
+              </div>
+              <div class="insight">
+                <span>Tiempo estimado</span>
+                <strong>42 min</strong>
+              </div>
+              <div class="insight">
+                <span>Ruta más corta</span>
+                <strong>Av. Providencia → Costanera Nte. → Ruta 5</strong>
+              </div>
+            </div>
+            <div class="timeline">
+              <div class="checkpoint">
+                <span>Origen</span>
+                <strong>Vitacura, Santiago</strong>
+              </div>
+              <div class="checkpoint">
+                <span>Destino</span>
+                <strong>San Bernardo, RM</strong>
+              </div>
+              <div class="checkpoint">
+                <span>Entrega estimada</span>
+                <strong>15:45 hrs</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="client" class="panel">
+        <header class="panel-header">
+          <div>
+            <h2>Panel del cliente</h2>
+            <p>Sigue tu pedido en tiempo real, conoce a tu conductor y controla tus costos.</p>
+          </div>
+          <div class="status-chip tracking">Seguimiento activo</div>
+        </header>
+        <div class="client-layout">
+          <div class="map card">
+            <div class="map-overlay">
+              <div class="route">
+                <span class="origin">Origen</span>
+                <svg viewBox="0 0 320 520" class="map-svg" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="mapGradient" x1="0" x2="0" y1="0" y2="1">
+                      <stop offset="0%" stop-color="#2b5fff" />
+                      <stop offset="100%" stop-color="#6bd9ff" />
+                    </linearGradient>
+                    <linearGradient id="routeGradient" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stop-color="#6bd9ff" />
+                      <stop offset="100%" stop-color="#0aff96" />
+                    </linearGradient>
+                  </defs>
+                  <path class="chile" d="M160 10c-22 30-32 62-38 94-5 26-1 59-14 82-12 21-30 35-28 58 2 22 27 36 32 58 6 27-17 54-11 81 6 26 36 37 38 63 3 33-33 53-30 76 3 24 39 25 58 25 20 0 56-3 60-26 4-22-30-45-27-69 3-24 38-39 34-62-4-23-41-31-45-54-4-22 22-42 19-65-4-25-31-43-36-68-4-21 10-42 9-63-1-26-20-50-31-74z" fill="url(#mapGradient)" opacity="0.85" />
+                  <path class="route-path" d="M200 450 C220 400 190 350 210 300 C230 250 200 200 220 150 C240 100 210 70 200 40" stroke="url(#routeGradient)" stroke-width="8" stroke-linecap="round" fill="none" />
+                  <circle class="truck" cx="210" cy="305" r="12" />
+                  <circle class="destination" cx="205" cy="80" r="10" />
+                </svg>
+                <span class="destination">Destino</span>
+              </div>
+              <div class="map-caption">
+                <strong>Santiago Centro</strong>
+                <p>Tu camión llegará en 12 min</p>
+              </div>
+            </div>
+          </div>
+          <div class="client-info-panel">
+            <article class="card driver-card">
+              <h3>Tu conductor</h3>
+              <div class="driver">
+                <img src="https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?auto=format&fit=crop&w=200&q=80" alt="Conductor" />
+                <div>
+                  <strong>María González</strong>
+                  <span>Placa: KZ-BB-19</span>
+                  <span>Licencia B Profesional</span>
+                </div>
+              </div>
+              <ul>
+                <li><span>Vehículo</span><strong>Camión refrigerado 6T</strong></li>
+                <li><span>Contacto</span><strong>+56 9 8765 4321</strong></li>
+              </ul>
+            </article>
+            <article class="card cost-card">
+              <h3>Resumen de costos</h3>
+              <ul>
+                <li><span>Tarifa base</span><strong>$38.000</strong></li>
+                <li><span>Recargo distancia</span><strong>$9.500</strong></li>
+                <li><span>Seguro premium</span><strong>$4.200</strong></li>
+              </ul>
+              <div class="total">
+                <span>Total estimado</span>
+                <strong>$51.700</strong>
+              </div>
+              <p class="hint">El cálculo final puede variar según el tráfico en ruta.</p>
+            </article>
+            <article class="card eta-card">
+              <h3>Entrega estimada</h3>
+              <div class="eta">
+                <span>Hora aproximada</span>
+                <strong>15:45 hrs</strong>
+              </div>
+              <div class="eta">
+                <span>Distancia restante</span>
+                <strong>3.8 km</strong>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="feedback" class="panel">
+        <header class="panel-header">
+          <h2>Evaluación del servicio</h2>
+          <p>Comparte tu experiencia para mejorar la calidad tanto del cliente como del trabajador.</p>
+        </header>
+        <div class="feedback-grid">
+          <article class="card feedback-card">
+            <h3>Evaluación del cliente</h3>
+            <p>El trabajador califica al cliente al finalizar el servicio.</p>
+            <div class="stars" data-role="worker-rating">
+              <button aria-label="1 estrella">★</button>
+              <button aria-label="2 estrellas">★</button>
+              <button aria-label="3 estrellas">★</button>
+              <button aria-label="4 estrellas">★</button>
+              <button aria-label="5 estrellas">★</button>
+            </div>
+            <textarea rows="4" placeholder="Comentarios para el cliente..." aria-label="Comentarios para el cliente"></textarea>
+            <button class="btn-primary">Enviar evaluación</button>
+          </article>
+          <article class="card feedback-card">
+            <h3>Evaluación del trabajador</h3>
+            <p>El cliente valora la atención y desempeño del conductor.</p>
+            <div class="stars" data-role="client-rating">
+              <button aria-label="1 estrella">★</button>
+              <button aria-label="2 estrellas">★</button>
+              <button aria-label="3 estrellas">★</button>
+              <button aria-label="4 estrellas">★</button>
+              <button aria-label="5 estrellas">★</button>
+            </div>
+            <textarea rows="4" placeholder="Comentarios para el trabajador..." aria-label="Comentarios para el trabajador"></textarea>
+            <button class="btn-primary">Enviar evaluación</button>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <p>© 2024 MoviLog. Soluciones de transporte inteligentes para Chile.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
