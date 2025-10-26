@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Retiros{% endblock %}
+{% block content %}
+<section class="card">
+    <h2>Registrar retiro</h2>
+    <form method="post" class="form-grid">
+        <label>Alumno
+            <select name="student_id" required>
+                <option value="">Seleccione…</option>
+                {% for student in students %}
+                    <option value="{{ student.id }}">{{ student.full_name }} - {{ student.course }}</option>
+                {% endfor %}
+            </select>
+        </label>
+        <label>Fecha
+            <input type="date" name="date" />
+        </label>
+        <label>Autorizado por
+            <input type="text" name="authorized_by" required />
+        </label>
+        <label>Motivo
+            <textarea name="reason" rows="3" required></textarea>
+        </label>
+        <button type="submit">Guardar</button>
+    </form>
+</section>
+
+<section class="card">
+    <h2>Últimos retiros</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Alumno</th>
+                <th>Autorizado por</th>
+                <th>Motivo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in records %}
+                <tr>
+                    <td>{{ record.date.strftime('%d-%m-%Y') }}</td>
+                    <td>{{ record.student.full_name }}</td>
+                    <td>{{ record.authorized_by }}</td>
+                    <td>{{ record.reason }}</td>
+                </tr>
+            {% else %}
+                <tr><td colspan="4">No hay retiros registrados.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

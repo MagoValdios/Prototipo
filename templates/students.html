@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Alumnos{% endblock %}
+{% block content %}
+<section class="card">
+    <h2>Registrar alumno</h2>
+    <form method="post" class="form-grid">
+        <label>Nombre completo
+            <input type="text" name="full_name" required />
+        </label>
+        <label>Curso
+            <input type="text" name="course" placeholder="Ej: 4°A" required />
+        </label>
+        <label>Nombre apoderado
+            <input type="text" name="guardian_name" required />
+        </label>
+        <label>Correo apoderado
+            <input type="email" name="guardian_email" required />
+        </label>
+        <label>Clave apoderado
+            <input type="password" name="guardian_password" required />
+        </label>
+        <button type="submit">Guardar</button>
+    </form>
+</section>
+
+<section class="grid">
+    <article class="card">
+        <h2>Listado</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Curso</th>
+                    <th>Apoderado</th>
+                    <th>Correo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                    <tr>
+                        <td>{{ student.full_name }}</td>
+                        <td>{{ student.course }}</td>
+                        <td>{{ student.guardian_name }}</td>
+                        <td>{{ student.guardian_email }}</td>
+                    </tr>
+                {% else %}
+                    <tr><td colspan="4">Aún no hay alumnos registrados.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </article>
+
+    <article class="card">
+        <h2>Estadísticas por curso</h2>
+        <ul>
+            {% for course, count in course_stats %}
+                <li>{{ course }}: <strong>{{ count }}</strong> alumnos</li>
+            {% else %}
+                <li>Sin datos para mostrar.</li>
+            {% endfor %}
+        </ul>
+    </article>
+</section>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}Accidentes{% endblock %}
+{% block content %}
+<section class="card">
+    <h2>Registrar accidente</h2>
+    <form method="post" class="form-grid">
+        <label>Alumno
+            <select name="student_id" required>
+                <option value="">Seleccione…</option>
+                {% for student in students %}
+                    <option value="{{ student.id }}">{{ student.full_name }} - {{ student.course }}</option>
+                {% endfor %}
+            </select>
+        </label>
+        <label>Fecha
+            <input type="date" name="date" />
+        </label>
+        <label>Severidad
+            <select name="severity" required>
+                <option value="">Seleccione…</option>
+                <option value="Leve">Leve</option>
+                <option value="Media">Media</option>
+                <option value="Grave">Grave</option>
+            </select>
+        </label>
+        <label>Descripción
+            <textarea name="description" rows="3" required></textarea>
+        </label>
+        <label>Acción tomada
+            <textarea name="action_taken" rows="2"></textarea>
+        </label>
+        <button type="submit">Guardar</button>
+    </form>
+</section>
+
+<section class="grid">
+    <article class="card">
+        <h2>Últimos accidentes</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Alumno</th>
+                    <th>Severidad</th>
+                    <th>Descripción</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in records %}
+                    <tr>
+                        <td>{{ record.date.strftime('%d-%m-%Y') }}</td>
+                        <td>{{ record.student.full_name }}</td>
+                        <td>{{ record.severity }}</td>
+                        <td>{{ record.description }}</td>
+                        <td>{{ record.action_taken or '—' }}</td>
+                    </tr>
+                {% else %}
+                    <tr><td colspan="5">No hay accidentes registrados.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </article>
+
+    <article class="card">
+        <h2>Estadísticas por severidad</h2>
+        <ul>
+            {% for severity, count in accident_summary.items() %}
+                <li>{{ severity }}: <strong>{{ count }}</strong></li>
+            {% else %}
+                <li>Sin datos disponibles.</li>
+            {% endfor %}
+        </ul>
+    </article>
+</section>
+{% endblock %}
