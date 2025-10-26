@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block title %}Asistencia{% endblock %}
+{% block content %}
+<section class="card">
+    <h2>Registrar asistencia</h2>
+    <form method="post" class="form-grid">
+        <label>Alumno
+            <select name="student_id" required>
+                <option value="">Seleccione…</option>
+                {% for student in students %}
+                    <option value="{{ student.id }}">{{ student.full_name }} - {{ student.course }}</option>
+                {% endfor %}
+            </select>
+        </label>
+        <label>Fecha
+            <input type="date" name="date" value="{{ request.form.date or '' }}" />
+        </label>
+        <label>Estado
+            <select name="status" required>
+                <option value="">Seleccione…</option>
+                <option value="Presente">Presente</option>
+                <option value="Ausente">Ausente</option>
+                <option value="Justificado">Justificado</option>
+            </select>
+        </label>
+        <label>Observaciones
+            <textarea name="notes" rows="2"></textarea>
+        </label>
+        <button type="submit">Guardar</button>
+    </form>
+</section>
+
+<section class="grid">
+    <article class="card">
+        <h2>Últimos registros</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Alumno</th>
+                    <th>Estado</th>
+                    <th>Notas</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in attendance_records %}
+                    <tr>
+                        <td>{{ record.date.strftime('%d-%m-%Y') }}</td>
+                        <td>{{ record.student.full_name }}</td>
+                        <td>{{ record.status }}</td>
+                        <td>{{ record.notes or '—' }}</td>
+                    </tr>
+                {% else %}
+                    <tr><td colspan="4">No hay registros recientes.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </article>
+
+    <article class="card">
+        <h2>Estadísticas</h2>
+        <h3>Totales</h3>
+        <ul>
+            {% for status, count in attendance_summary.totals.items() %}
+                <li>{{ status }}: <strong>{{ count }}</strong></li>
+            {% else %}
+                <li>Sin datos disponibles.</li>
+            {% endfor %}
+        </ul>
+        <h3>Tasa de asistencia por alumno</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Alumno</th>
+                    <th>Registros</th>
+                    <th>Tasa presencia</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in attendance_summary.rates %}
+                    <tr>
+                        <td>{{ row.student }}</td>
+                        <td>{{ row.total }}</td>
+                        <td>{{ row.rate }}%</td>
+                    </tr>
+                {% else %}
+                    <tr><td colspan="3">Sin datos para mostrar.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </article>
+</section>
+{% endblock %}

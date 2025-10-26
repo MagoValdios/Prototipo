@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Portal Apoderados{% endblock %}
+{% block content %}
+<section class="card narrow">
+    <h2>Ingreso apoderados</h2>
+    <form method="post" class="form-grid">
+        <label>Correo
+            <input type="email" name="email" required />
+        </label>
+        <label>Contraseña
+            <input type="password" name="password" required />
+        </label>
+        <button type="submit">Ingresar</button>
+    </form>
+</section>
+{% endblock %}

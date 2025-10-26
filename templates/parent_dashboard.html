@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}Resumen apoderado{% endblock %}
+{% block content %}
+<section class="card">
+    <div class="card-header">
+        <h2>{{ student.full_name }}</h2>
+        <a class="button" href="{{ url_for('parent_logout') }}">Cerrar sesión</a>
+    </div>
+    <p>Curso: <strong>{{ student.course }}</strong></p>
+    <p>Apoderado: <strong>{{ student.guardian_name }}</strong> ({{ student.guardian_email }})</p>
+</section>
+
+<section class="grid">
+    <article class="card">
+        <h2>Resumen asistencia</h2>
+        <ul>
+            {% for status, count in attendance_summary.totals.items() %}
+                <li>{{ status }}: <strong>{{ count }}</strong></li>
+            {% else %}
+                <li>Aún no hay asistencia registrada.</li>
+            {% endfor %}
+        </ul>
+        <h3>Detalle</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Alumno</th>
+                    <th>Registros</th>
+                    <th>Tasa presencia</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in attendance_summary.rates %}
+                    <tr>
+                        <td>{{ row.student }}</td>
+                        <td>{{ row.total }}</td>
+                        <td>{{ row.rate }}%</td>
+                    </tr>
+                {% else %}
+                    <tr><td colspan="3">Sin registros.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </article>
+
+    <article class="card">
+        <h2>Promedios de notas</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Asignatura</th>
+                    <th>Promedio</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in grade_summary %}
+                    <tr>
+                        <td>{{ row.subject }}</td>
+                        <td>{{ row.average }}</td>
+                    </tr>
+                {% else %}
+                    <tr><td colspan="2">Sin notas registradas.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </article>
+</section>
+{% endblock %}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AllCollege - {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+    <header class="top-bar">
+        <h1>AllCollege</h1>
+        <nav>
+            <a href="{{ url_for('index') }}">Inicio</a>
+            <a href="{{ url_for('students') }}">Alumnos</a>
+            <a href="{{ url_for('attendance') }}">Asistencia</a>
+            <a href="{{ url_for('withdrawals') }}">Retiros</a>
+            <a href="{{ url_for('accidents') }}">Accidentes</a>
+            <a href="{{ url_for('grades') }}">Notas</a>
+            <a href="{{ url_for('parent_login') }}">Portal Apoderados</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                <ul class="flash-list">
+                    {% for category, message in messages %}
+                        <li class="flash flash-{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <small>© {{ current_year or 2024 }} AllCollege</small>
+    </footer>
+</body>
+</html>

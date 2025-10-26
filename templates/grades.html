@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}Notas{% endblock %}
+{% block content %}
+<section class="card">
+    <h2>Registrar nota</h2>
+    <form method="post" class="form-grid">
+        <label>Alumno
+            <select name="student_id" required>
+                <option value="">Seleccione…</option>
+                {% for student in students %}
+                    <option value="{{ student.id }}">{{ student.full_name }} - {{ student.course }}</option>
+                {% endfor %}
+            </select>
+        </label>
+        <label>Asignatura
+            <input type="text" name="subject" required />
+        </label>
+        <label>Periodo
+            <input type="text" name="term" placeholder="Ej: 1er trimestre" required />
+        </label>
+        <label>Nota
+            <input type="number" name="score" step="0.01" min="1" max="7" required />
+        </label>
+        <button type="submit">Guardar</button>
+    </form>
+</section>
+
+<section class="grid">
+    <article class="card">
+        <h2>Últimas notas</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Alumno</th>
+                    <th>Asignatura</th>
+                    <th>Periodo</th>
+                    <th>Nota</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in records %}
+                    <tr>
+                        <td>{{ record.student.full_name }}</td>
+                        <td>{{ record.subject }}</td>
+                        <td>{{ record.term }}</td>
+                        <td>{{ record.score }}</td>
+                    </tr>
+                {% else %}
+                    <tr><td colspan="4">No hay notas registradas.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </article>
+
+    <article class="card">
+        <h2>Promedios por alumno y asignatura</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Alumno</th>
+                    <th>Asignatura</th>
+                    <th>Promedio</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in grade_summary %}
+                    <tr>
+                        <td>{{ row.student }}</td>
+                        <td>{{ row.subject }}</td>
+                        <td>{{ row.average }}</td>
+                    </tr>
+                {% else %}
+                    <tr><td colspan="3">Sin datos disponibles.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </article>
+</section>
+{% endblock %}

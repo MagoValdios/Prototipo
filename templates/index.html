@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Panel principal{% endblock %}
+{% block content %}
+<section class="grid">
+    <article class="card">
+        <h2>Resumen de alumnos</h2>
+        <p class="stat">Total matriculados: <strong>{{ total_students }}</strong></p>
+        <h3>Distribución por curso</h3>
+        <ul>
+            {% for course, count in course_distribution %}
+                <li>{{ course }}: <strong>{{ count }}</strong> alumnos</li>
+            {% else %}
+                <li>No hay alumnos registrados.</li>
+            {% endfor %}
+        </ul>
+    </article>
+
+    <article class="card">
+        <h2>Asistencia general</h2>
+        <ul>
+            {% for status, count in attendance_summary.totals.items() %}
+                <li>{{ status }}: <strong>{{ count }}</strong></li>
+            {% else %}
+                <li>No hay registros de asistencia.</li>
+            {% endfor %}
+        </ul>
+    </article>
+
+    <article class="card">
+        <h2>Accidentes registrados</h2>
+        <ul>
+            {% for severity, count in accident_summary.items() %}
+                <li>{{ severity }}: <strong>{{ count }}</strong></li>
+            {% else %}
+                <li>No hay accidentes registrados.</li>
+            {% endfor %}
+        </ul>
+    </article>
+</section>
+{% endblock %}
